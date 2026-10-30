@@ -1,0 +1,42 @@
+// Glass Arc: Zen settings written once by the installer; they stay
+// editable in Zen's Settings afterwards.
+
+// userChrome.css (AI panel layout)
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+
+// see-through sidebar and address bar, address bar floats like Arc's
+user_pref("zen.theme.acrylic-sidebar", true);
+user_pref("zen.theme.acrylic-urlbar", true);
+user_pref("zen.view.grey-out-inactive-windows", false);
+user_pref("zen.urlbar.behavior", "float");
+user_pref("zen.urlbar.replace-newtab", true);
+user_pref("zen.urlbar.show-domain-only-in-sidebar", true);
+
+// address bar on top, new-tab button at the top of the list
+user_pref("zen.view.use-single-toolbar", false);
+user_pref("zen.view.show-newtab-button-top", true);
+user_pref("zen.glance.enabled", true);
+user_pref("zen.workspaces.separate-essentials", false);
+
+// the compact button (◫) switches between the Nova strip and the full sidebar
+user_pref("zen.view.compact.enable-at-startup", true);
+// Zen's own slide-out animation fights the strip's width transition
+user_pref("zen.view.compact.animate-sidebar", false);
+
+// AI side panel (Ctrl+Alt+X) on the right, ChatGPT by default
+user_pref("browser.ml.enable", true);
+user_pref("browser.ml.chat.enabled", true);
+user_pref("browser.ml.chat.sidebar", true);
+user_pref("browser.ml.chat.provider", "https://chatgpt.com");
+user_pref("browser.ml.chat.shortcuts", true);
+user_pref("browser.ml.chat.shortcuts.custom", true);
+user_pref("browser.ml.chat.menu", true);
+user_pref("browser.ml.chat.page", true);
+user_pref("sidebar.position_start", false);
+
+// smoother video, less memory
+user_pref("media.hardware-video-decoding.enabled", true);
+user_pref("media.hardware-video-decoding.force-enabled", true);
+user_pref("media.memory_cache_max_size", 262144);
+user_pref("browser.tabs.unloadOnLowMemory", true);
+user_pref("browser.sessionhistory.max_total_viewers", 4);

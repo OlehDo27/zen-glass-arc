@@ -1,0 +1,3 @@
+// Windows 11 blurs the desktop behind the window (Acrylic backdrop)
+user_pref("widget.windows.mica", true);
+user_pref("widget.windows.mica.toplevel-backdrop", 2);

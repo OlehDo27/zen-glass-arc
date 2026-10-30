@@ -1,0 +1,144 @@
+[
+  {
+    "property": "mod.glassarc.style",
+    "label": "Стиль поверхности (также в меню «Edit Theme»)",
+    "type": "dropdown",
+    "defaultValue": "glass",
+    "options": [
+      {
+        "label": "Матовое стекло",
+        "value": "glass"
+      },
+      {
+        "label": "Затемнённое матовое стекло",
+        "value": "smoked"
+      },
+      {
+        "label": "Непрозрачный, как Firefox Nova",
+        "value": "solid"
+      },
+      {
+        "label": "Стандартный Zen (без стекла)",
+        "value": "zen"
+      }
+    ]
+  },
+  {
+    "property": "mod.glassarc.tint",
+    "label": "Оттенок стекла (градиент)",
+    "type": "dropdown",
+    "defaultValue": "aurora",
+    "options": [
+      {
+        "label": "Только цвет пространства Zen",
+        "value": "space"
+      },
+      {
+        "label": "Аврора (фиолетовый → бирюза)",
+        "value": "aurora"
+      },
+      {
+        "label": "Закат (персик → малина)",
+        "value": "sunset"
+      },
+      {
+        "label": "Океан (синий → циан)",
+        "value": "ocean"
+      },
+      {
+        "label": "Розовый кварц",
+        "value": "rose"
+      },
+      {
+        "label": "Мята",
+        "value": "mint"
+      },
+      {
+        "label": "Графит (почти без цвета)",
+        "value": "graphite"
+      },
+      {
+        "label": "Свои цвета (поля ниже)",
+        "value": "custom"
+      }
+    ]
+  },
+  {
+    "property": "mod.glassarc.tint-strength",
+    "label": "Насыщенность оттенка, 0–1 (например 0.35)",
+    "type": "string",
+    "defaultValue": "0.35"
+  },
+  {
+    "property": "mod.glassarc.frost",
+    "label": "Матовость (молочная дымка), 0–0.4 (например 0.10)",
+    "type": "string",
+    "defaultValue": "0.10"
+  },
+  {
+    "property": "mod.glassarc.blur",
+    "label": "Размытие плавающих панелей (например 28px)",
+    "type": "string",
+    "defaultValue": "28px"
+  },
+  {
+    "property": "mod.glassarc.strip",
+    "label": "Сайдбар как в Nova в компакт-режиме (кнопка ◫): полоска иконок, выезжает при наведении, Essentials наверху",
+    "type": "checkbox",
+    "defaultValue": true
+  },
+  {
+    "property": "mod.glassarc.strip-width",
+    "label": "Ширина раскрытой полосы (например 252px)",
+    "type": "string",
+    "defaultValue": "252px"
+  },
+  {
+    "property": "mod.glassarc.urlbar-width",
+    "label": "Ширина адресной строки сверху (например 620px)",
+    "type": "string",
+    "defaultValue": "620px"
+  },
+  {
+    "property": "mod.glassarc.sheen",
+    "label": "Отлив: мягкий блик и радужная кромка",
+    "type": "checkbox",
+    "defaultValue": true
+  },
+  {
+    "property": "mod.glassarc.texture",
+    "label": "Пескоструйная фактура (очень тонкая, не шум)",
+    "type": "checkbox",
+    "defaultValue": false
+  },
+  {
+    "property": "mod.glassarc.nova",
+    "label": "Кнопки и вкладки в стиле Firefox Nova",
+    "type": "checkbox",
+    "defaultValue": true
+  },
+  {
+    "property": "mod.glassarc.ai-panel",
+    "label": "AI-панель (Ctrl+Alt+X) выезжает стеклянной карточкой",
+    "type": "checkbox",
+    "defaultValue": true
+  },
+  {
+    "property": "mod.glassarc.c1",
+    "label": "Свой цвет 1 (верх-лево), например #8b5cf6",
+    "type": "string",
+    "defaultValue": "#8b5cf6"
+  },
+  {
+    "property": "mod.glassarc.c2",
+    "label": "Свой цвет 2 (низ-право), например #06b6d4",
+    "type": "string",
+    "defaultValue": "#06b6d4"
+  },
+  {
+    "property": "mod.glassarc.c3",
+    "label": "Свой цвет 3 (отлив по диагонали), например #f472b6",
+    "type": "string",
+    "defaultValue": "#f472b6"
+  }
+]

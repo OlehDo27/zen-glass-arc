@@ -1,0 +1,48 @@
+/* AI side panel (Ctrl+Alt+X): one slim header row, no footer, the rest is
+ * the chat. The outer Zen header is hidden by the Glass Arc mod. */
+@-moz-document url("chrome://browser/content/genai/chat.html") {
+  body {
+    background: transparent !important;
+  }
+
+  /* ChatGPT ▾ ............ ⋯ ✕ */
+  #header,
+  #multi-stage-message-root + #header {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 4px;
+    padding-block: 4px !important;
+    padding-inline: 8px 6px !important;
+    background: transparent !important;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent) !important;
+  }
+
+  sidebar-panel-switcher {
+    display: none !important;
+  }
+
+  #provider {
+    order: 0 !important;
+    flex: 1 !important;
+    font-weight: 600 !important;
+  }
+
+  #permissions-indicator {
+    order: 1 !important;
+  }
+
+  #header-more {
+    order: 2 !important;
+    margin-inline-end: 0 !important;
+  }
+
+  #header-close {
+    display: inline-flex !important;
+    order: 3 !important;
+  }
+
+  /* "Summarize page" lives in the right-click menu instead */
+  #footer {
+    display: none !important;
+  }
+}

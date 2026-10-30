@@ -1,0 +1,5 @@
+// the desktop shows through the sidebar (the compositor blurs it)
+user_pref("zen.widget.linux.transparency", true);
+// VA-API video decoding
+user_pref("media.ffvpx-hw.enabled", true);
+user_pref("media.rdd-ffmpeg.enabled", true);
