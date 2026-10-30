@@ -258,23 +258,44 @@ if ($Uninstall) {
 }
 
 # ---- loader for the style switch in Edit Theme (a file in Zen's folder) --------
+function Invoke-Elevated($code) {
+  # The file contents travel inside the command, so the admin window needs
+  # no access to this user's temp folder and no quoting of paths.
+  $principal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+  if ($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    & ([scriptblock]::Create($code))
+    return
+  }
+  $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($code))
+  Start-Process powershell -Verb RunAs -Wait -WindowStyle Hidden `
+    -ArgumentList "-NoProfile", "-ExecutionPolicy", "Bypass", "-EncodedCommand", $encoded
+}
+
+function Quote($path) { "'" + ($path -replace "'", "''") + "'" }
+
+function Get-Base64($path) { [Convert]::ToBase64String([IO.File]::ReadAllBytes($path)) }
+
 if (-not $NoLoader -and $ZenExe) {
   $zenDir = Split-Path $ZenExe
+  $prefDir = Join-Path $zenDir "defaults\pref"
   $configJs = Join-Path $zenDir "config.js"
-  $configPrefs = Join-Path $zenDir "defaults\pref\config-prefs.js"
+  $configPrefs = Join-Path $prefDir "config-prefs.js"
   if ($Uninstall) {
     if ((Test-Path $configJs) -and (Select-String -Path $configJs -Pattern "Glass Arc loader" -Quiet)) {
-      $cmd = "Remove-Item -LiteralPath '$configJs','$configPrefs' -Force"
-      Start-Process powershell -Verb RunAs -Wait -ArgumentList "-NoProfile", "-Command", $cmd
+      try { Invoke-Elevated "Remove-Item -LiteralPath $(Quote $configJs), $(Quote $configPrefs) -Force -ErrorAction SilentlyContinue" } catch { }
     }
   } elseif (Ask "Добавить переключатель стиля в Edit Theme? Windows спросит права администратора, чтобы положить config.js в $zenDir") {
-    $cmd = "Copy-Item -LiteralPath '$(Join-Path $Src 'loader\config.js')' -Destination '$configJs' -Force; " +
-           "Copy-Item -LiteralPath '$(Join-Path $Src 'loader\defaults\pref\config-prefs.js')' -Destination '$configPrefs' -Force"
-    try {
-      Start-Process powershell -Verb RunAs -Wait -ArgumentList "-NoProfile", "-Command", $cmd
-      if (Test-Path $configJs) { Say "Переключатель стиля добавлен в Edit Theme" }
-    } catch {
-      Warn "Без прав администратора стиль выбирается в Настройки -> Zen Mods -> Glass Arc."
+    $code = @"
+New-Item -ItemType Directory -Force -Path $(Quote $prefDir) | Out-Null
+[IO.File]::WriteAllBytes($(Quote $configJs), [Convert]::FromBase64String('$(Get-Base64 (Join-Path $Src "loader\config.js"))'))
+[IO.File]::WriteAllBytes($(Quote $configPrefs), [Convert]::FromBase64String('$(Get-Base64 (Join-Path $Src "loader\defaults\pref\config-prefs.js"))'))
+"@
+    try { Invoke-Elevated $code } catch { Warn "Права администратора не получены: $($_.Exception.Message)" }
+    if ((Test-Path $configJs) -and (Test-Path $configPrefs)) {
+      Say "Переключатель стиля добавлен в Edit Theme ($zenDir)"
+    } else {
+      Warn "Не удалось положить config.js в $zenDir — переключателя в Edit Theme не будет."
+      Warn "Стиль можно выбрать в Настройки -> Zen Mods -> Glass Arc, или запустите установщик снова."
     }
   }
 }

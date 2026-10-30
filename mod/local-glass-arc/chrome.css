@@ -290,6 +290,11 @@
         justify-content: center;
         padding-inline: 0 !important;
 
+        /* the ⋯ button would push the icon off centre */
+        & .zen-workspaces-actions {
+          display: none !important;
+        }
+
         & .zen-current-workspace-indicator-stack[no-icon="true"] {
           display: none !important;
         }
@@ -303,7 +308,6 @@
           opacity: 1 !important;
           flex: 0 0 auto !important;
           margin-inline: auto !important;
-          translate: 6px 0;
           width: 24px;
           height: 24px;
           line-height: 24px;
@@ -319,6 +323,12 @@
             text-transform: uppercase;
           }
         }
+      }
+
+      /* cards too wide for the strip (update notes, media player) show
+       * once it opens */
+      & :is(zen-sidebar-notification, #zen-media-controls-toolbar) {
+        display: none !important;
       }
 
       & :is(.tab-label-container, .tab-close-button, .tab-reset-button, .tab-reset-pin-button,
